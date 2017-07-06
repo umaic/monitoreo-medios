@@ -1,0 +1,15 @@
+<div class="login jumbotron center-block">
+  <h3>UMAIC</h3>
+  <form role="form" (submit)="login($event, username.value, password.value)">
+  <div class="form-group">
+    <label for="username">Usuario</label>
+    <input type="text" #username class="form-control" id="username" placeholder="Nombre Usuario">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" #password class="form-control" id="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Ingresar</button>
+   
+</form>
+</div>
