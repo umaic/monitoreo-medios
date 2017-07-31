@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthHttp } from 'angular2-jwt';
 
 
-
 const styles = require('./home.css');
 const template = require('./home.html');
 
@@ -16,6 +15,7 @@ const template = require('./home.html');
 
 
 export class Home {
+  startDate: any;
   data;
   filterQuery = '';
   wordQuery = '';
@@ -23,10 +23,23 @@ export class Home {
   decodedJwt: string;
   response: string;
   api: string;
+  category;
+  cate;
 
   constructor(public router: Router, public http: Http, public authHttp: AuthHttp) {
     this.jwt = localStorage.getItem('id_token');
     this.decodedJwt = this.jwt;// && window.jwt_decode(this.jwt);
+	this.startDate = new Date(2017, 1, 4);
+	this.cate=[{name:'test',id:'1'}];
+  }
+ set humanDate(e){
+    e = e.split('-');
+    let d = new Date(Date.UTC(e[0], e[1]-1, e[2]));
+    this.startDate.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+  }
+
+  get humanDate(){
+    return this.startDate.toISOString().substring(0, 10);
   }
 
  Search() {
@@ -36,8 +49,9 @@ export class Home {
             .subscribe((data)=> {
                 setTimeout(()=> {
 					let data1=data.json();
-					this.data=data1.resp[0].return_sql.result_sql[0].resp;
-                }, 1000);
+					console.log('str' + data1);
+					this.data=data1;
+					}, 1000);
             });
   }
 
