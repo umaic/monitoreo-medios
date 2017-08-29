@@ -1,4 +1,14 @@
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h3 class="display-3">Monitor de Medios</h3>
+    <p class="lead">Seleccione una categoría a buscar o busque palabras claves individuales.</p>
+  </div>
+</div>
+
 <div>
+
+
   <div class="home jumbotron centered">
     <h4>Buscador de noticias</h4>
    
@@ -7,21 +17,38 @@
    <input [(ngModel)]="iniDate" type="date" name="startDate"/>
    </div-->
    
-<!--div class="form-group">
-          <label for="status">Categorias:</label>
-         <select [(ngModel)]="categories">
- 
-    <option id="{{cate.id}}" [ngValue]="cate">{{cate.name}}</option>
+        <div class="input-group">
+        
+            <select [(ngModel)]="defaultCat" name="cates">
+                <option [value]=0>Categorias:</option>
+                <option *ngFor="let option of cats" [value]="option.id"> {{ option.name }} </option>
+            </select>
+        
+		</div> 
 
-</select>
-        </div-->  
+
+      <div class="input-group">
+        
+            <select [(ngModel)]="defaultSrc" name="sources">
+                <option [value]=0>Fuentes:</option>
+                <option *ngFor="let option of sources" [value]="option.id"> {{ option.name }} </option>
+            </select>
+        
+		</div> 		
   
    						<div class="input-group">
   <input type="text" class="form-control" [(ngModel)]="wordQuery" placeholder="ingrese palabra">
   <span class="input-group-btn">
-      <button class="btn btn-secondary" (click)="Search()" type="button">Buscar</button>
+      <button class="btn btn-success" (click)="Search()" (keyup.enter)="Search();" type="button">Buscar</button>
   </span>
                        </div>
+   
+   <div class="form-group">
+   <h5><span class="badge badge-default">Keywords:</span></h5><label>{{ keys}}</label>
+   
+   </div>
+   
+    <button class="btn btn-success" (click)="down_csv()"  type="button">CSV</button>
    
    <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5">
     <thead>

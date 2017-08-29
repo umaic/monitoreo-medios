@@ -2,6 +2,11 @@
   <h3>UMAIC</h3>
   <form role="form" (submit)="login($event, username.value, password.value)">
   <div class="form-group">
+    <label for="username">Ayuda</label>
+   <a href="http://monitor.umaic.org/medios/help/master.html" target="_blank">AYUDA</a>
+  </div>
+
+  <div class="form-group">
     <label for="username">Usuario</label>
     <input type="text" #username class="form-control" id="username" placeholder="Nombre Usuario">
   </div>
