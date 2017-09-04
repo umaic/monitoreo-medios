@@ -17,17 +17,15 @@ export class Login {
   }
 
   login(event, username, password) {
-   // event.preventDefault();
+  
     let body = JSON.stringify({ username, password });
-    	   console.log('Success str:' + body );
-	
-	   let url='/medios/backend/login.php?username='+username+'&password='+password;
-        
+    
+	     let url='/medios/backend/login.php?username='+username+'&password='+password;
+           console.log('url:' + url );
     this.http.get(url)
 	.subscribe((data)=> {
                 setTimeout(()=> {
 					let data1=data.json();
-				
 				    localStorage.setItem('id_token', data1.token);
 					localStorage.setItem('user_id', data1.id);
 					if(data1.id>0) {

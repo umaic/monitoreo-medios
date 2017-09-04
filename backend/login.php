@@ -1,11 +1,11 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-$ubase='http://localhost:8888/v2';
+$ubase='http://localhost/v2';
 $mysql_host='localhost';
 $mysql_usr='root';
 $mysql_pass='';
-$mysql_db='news_monitor';
+$mysql_db='monitormedios';
 
 header('Content-type: application/json; charset=utf8');///format json
 
@@ -16,7 +16,7 @@ $arr=array();
 
   $connsqli = new mysqli($mysql_host, $mysql_usr, $mysql_pass, $mysql_db);
   
-$var=json_decode($_GET['var']);  
+//$var=json_decode($_GET['var']);  
   
 //echo $var->username; 
   
@@ -26,7 +26,7 @@ $var=json_decode($_GET['var']);
   ////verify connection, if error condition
     if ($connsqli->connect_errno ) {
 
-        $infoarr[]= array("ConnSql" => $connsqli->connect_error);
+       
 
     } else {
 
@@ -34,31 +34,31 @@ $var=json_decode($_GET['var']);
 
 ///chartset
         /* utf8 */
-        if (!$connsqli->set_charset("utf8")) {
-            $errorarr[]= array("Error utf8" => $connsqli->error);
+        if (!$connsqli->set_charset('utf8')) {
+          
             //exit();
         } else {
 
-            $infoarr[]= array("CharSet" => $connsqli->character_set_name());
+            
         }
   
      		
-		$sql = "SELECT usr_id, usr_token from usr_user where usr_name='".$var->username."' and usr_password='".$var->password."'";;
-		//echo $sql;
+		$sql = "SELECT id, token from user where name='".$_GET['username']."' and token='".$_GET['password']."'";
+	//	echo $sql;
 		
 
 		$querysrc = mysqli_query($connsqli,$sql);
 
-			$resjson=["id"=>0,"token"=>''];
+			$resjson=['id'=>0,'token'=>''];
 		
 			while ($rowsrc = mysqli_fetch_array($querysrc)){
 		
-	$id	=$rowsrc['usr_id'];
-	$token= $rowsrc['usr_token'];
-	$resjson=["id"=>$id,"token"=>'test-token-user'.$token];
+	$id	=$rowsrc['id'];
+	$token= $rowsrc['token'];
+	$resjson=['id'=>$id,'token'=>'test-token-user'.$token];
+	
 				}
-		
-   //// return json
-echo json_encode($resjson, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+	
+echo json_encode($resjson);
 	}
 ?>

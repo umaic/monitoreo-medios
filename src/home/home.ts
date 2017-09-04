@@ -40,7 +40,7 @@ export class Home {
   options;
   constructor(public router: Router, public http: Http, public authHttp: AuthHttp) {
     this.jwt = localStorage.getItem('id_token');
-    this.decodedJwt = this.jwt;
+    this.decodedJwt = this.jwt;// && window.jwt_decode(this.jwt);
 	this.startDate = new Date(2017, 1, 4);
 	this.cats1 = [{id: 0, name: 'CATEGORIAS'},
     { id: 1, name: 'Fondo de tierras'},
@@ -163,10 +163,10 @@ export class Home {
 	this.options = {
     fieldSeparator: '|',
     quoteStrings: '',
- 
+    //decimalseparator: ',',
     showLabels: false,
     showTitle: false,
-  
+    //useBom: true
   };
 	  }
 set humanDate(e){
@@ -181,13 +181,10 @@ set humanDate(e){
 
  Search() {
 	 let url='/medios/backend/search.php?var='+this.wordQuery+'&cat='+this.defaultCat+'&src='+this.defaultSrc;
-
-	 console.log('getd:' + url );
-	 this.http.get(url)
+		this.http.get(url)
             .subscribe((data)=> {
                 setTimeout(()=> {
 					let data1=data.json();
-					console.log('key' + data1.key);
 					this.keys=data1.key;
 					this.data=data1.resp;
 					}, 1000);
@@ -196,12 +193,21 @@ set humanDate(e){
 Load2() {
     if(localStorage.getItem('user_id')==='1') {
     this.cats=this.cats1;
-	} 
-	if(localStorage.getItem('user_id')==='2') {
+	} else {
     this.cats=this.cats2;
 	}
   }
-}
+Load() {
+	 
+	 this.http.get(url)
+            .subscribe((data)=> {
+                setTimeout(()=> {
+					let data1=data.json();
+					console.log('cats:' + data1.resp);
+					this.cats=data1.resp;
+					}, 1000);
+            });
+  }
 
  down_csv() {
 	new Angular2Csv(this.data, 'My Report',this.options);
