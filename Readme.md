@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+﻿<<<<<<< HEAD
 # Monitoreo de Medios.
 
 Sistema de Monitoreo de Medios
@@ -10,6 +10,10 @@ Sistema de Monitoreo de Medios
 ## instalación 
 
 >>>>>>> c383758afaf250117266f43cfdfb0878aee31b9f
+
+Crear base de datos mysql y restaurar backup
+monitormedios.sql
+
 Base de datos procesos cron
 /config/db.php
 Base de datos lectura de archivos

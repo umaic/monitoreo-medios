@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//error_reporting(E_ERROR | E_WARNING | E_PARSE);
 //require('../config/db.php');
 $mysql_host='localhost';
 $mysql_usr='monitor';
@@ -70,7 +70,7 @@ curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_SSLVERSION, 4);
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
+curl_setopt($ch, CURLOPT_VERBOSE, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 
@@ -110,8 +110,8 @@ case 1:
 ////get data of RSS  
 $DOM = new DOMDocument();
 //$doc->load($urload);
-//$DOM->loadxml($page);
-
+$DOM->loadxml($page);
+/*
 
 if (!$DOM->loadxml($page,LIBXML_PARSEHUGE))
 	{
@@ -127,7 +127,7 @@ if (!$DOM->loadxml($page,LIBXML_PARSEHUGE))
 		//return;
 		  
 	}
-
+*/
 
 foreach ($DOM->getElementsByTagName($node) as $node) {
 

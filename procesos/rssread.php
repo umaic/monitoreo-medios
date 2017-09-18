@@ -1,6 +1,12 @@
 <?php
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
-require('../config/db.php');
+//require('../config/db.php');
+
+$mysql_host='localhost';
+$mysql_usr='monitor';
+$mysql_pass='Myp4$M0';
+$mysql_db='monitormedios';
+
 $connsqli = new mysqli($mysql_host, $mysql_usr, $mysql_pass, $mysql_db);
 
 $debug=1; /// debug for watch alert´s {1 on 0 off }
